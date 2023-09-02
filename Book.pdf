@@ -1,0 +1,182 @@
+\documentclass[20pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[english, russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{multicol}
+\usepackage[nomessages]{fp}
+\usetikzlibrary{calc,through,backgrounds, fit, angles}
+\usepackage{lipsum}
+\usepackage{wrapfig}
+\usepackage{pgfplots}
+\usepackage{geometry}
+\usepackage{ragged2e}
+\usepackage{lipsum}
+\geometry{left=2cm, top=2cm, right=2cm, bottom=20mm}
+\begin{document}
+\begin{titlepage}
+	\begin{center}
+		\textbf{Доказательство формул и теорем по планиметрии}
+		
+		
+		\vfill
+		
+		\vspace{0.8cm}
+		Версия 1\\
+		21.06.2023
+		
+	\end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\section{Планимаетрия}
+
+\subsection{Окружности}
+
+
+\paragraph{Линия, проходящая через центры окружностей, перпендикулярна их общей хорде.}\
+
+\hfill
+
+\begin{wrapfigure}{R}{5cm}
+	\resizebox{5cm}{!}{%
+	\begin{tikzpicture}
+		[point/.style={inner sep=0pt, outer sep=0pt}, scale=0.9]
+		% Построим вершины
+		\coordinate[label=left:$O$] (O) at (0, 0);
+		\coordinate[label=right:$O_1$] (O1) at (3.5, 0);
+		\node (CO) [draw, circle, minimum size=5cm] at (O) {};
+		\node (CO1) [draw, circle, minimum size=3cm] at (O1) {};
+		\coordinate [label=above:$A$] (A) at (intersection 2 of CO and CO1);
+		\coordinate [label=below:$B$] (B) at (intersection 1 of CO and CO1);
+		\draw (O) -- (A);
+		\draw (O1) -- (A);
+		\draw (O) -- (B);
+		\draw (O1) -- (B);
+		\draw (O) -- (O1);
+		\draw (A) -- (B);
+		\node [point, label=above:$R$] (R) at ($ (O)!0.5!(A) $) {};
+		\node [point, label=below:$R$] (R) at ($ (O)!0.5!(B) $) {};
+		\node [point, label=above:$r$] (r) at ($ (A)!0.5!(O1) $) {};
+		\node [point, label=below:$R$] (R) at ($ (O)!0.5!(B) $) {};
+		\node [point, label=below:$r$] (r) at ($ (B)!0.5!(O1) $) {};
+		\coordinate [point, label=45:$Z$] (Z) at (intersection of CO--CO1 and A--B) {};
+		\coordinate [point, label=135:$K$] (K) at (intersection of O1--O and CO1) {};
+		\coordinate [point, label=280:$G$] (G) at (intersection of O--O1 and CO) {};
+		\begin{pgfonlayer}{background}
+			\node [fill=yellow!,fit=(CO1) (CO), rounded corners] {};
+		\end{pgfonlayer}
+	\end{tikzpicture}
+	}
+\end{wrapfigure}
+
+
+
+Доказательство:
+\begin{enumerate}
+	\item $\triangle{AO_1B}$ и $\triangle{AOB}$ равнобедренные $\Rightarrow \angle{O_1AZ}=\angle{O_1BZ}$ и $\angle{OBZ}=\angle{OAZ}$
+	\item $\triangle{OAO_1} = \triangle{OBO_1}$ по 3-ем сторонам $\Rightarrow OO_1 - $ биссектриса (к $\triangle{AOB}$ и $\triangle{BO_1A}$
+	\item Т.к $OG$ проходит через центр и делит хорду пополам, то $OG \bot AB \Rightarrow OO_1 \bot Z$
+\end{enumerate}
+
+\vspace{-0.7cm}
+
+\begin{flushright}
+	ЧТД.
+\end{flushright}
+
+\hfill
+
+\paragraph{Теорема об угле между секущими}\
+
+\hfill
+
+\begin{wrapfigure}{R}{5cm}
+	\resizebox{!}{2cm}{%
+	\begin{tikzpicture}[point/.style={inner sep=0pt, outer sep=0pt}, scale = 0.9, baseline={(current bounding box.center)}]]
+	\coordinate[label=$M$] (M) at (0, 5);
+	\coordinate (O) at (4, 1);
+	\coordinate (R1) at (3, 3);
+	\node (CO) [draw, circle, minimum size = 2.5cm] at (O) {};
+	\node[point, coordinate, label=0:$D$] (D) at (intersection of M--R1 and CO) {};
+	\node[point, label=$C$] (C) at (intersection of D--M and CO) {};
+	\draw (M)--(D);
+	\coordinate (R2) at (2, 2);
+	\node[point, coordinate, label=left:$A$] (A) at (intersection of R2--M and CO) {};
+	\node[point, coordinate, label=below:$B$] (B) at (intersection 1 of M--R2 and CO) {};
+	\draw (M)--(B);
+	\draw (A) -- (D);
+	\begin{pgfonlayer}{background}
+		\node [fill=yellow!,fit=(CO) (M), rounded corners] {};
+	\end{pgfonlayer}
+	\end{tikzpicture}
+	}
+\end{wrapfigure}
+
+\hfill
+
+Доказательство:
+\begin{enumerate}
+	\item Рассмотрим $\triangle{DAM}$ и $\angle{BAD}$:\\
+	$\angle{BAD}=\angle{DMB} + \angle{ADM}$\\
+	$\angle{DMB}=\angle{BAD} - \angle{ADM}$\\
+	\item Т.к. $\angle{BAD}$ и $\angle{ADM}$ являются вписанными в окружности, то:\\
+	$\angle{DMB}=\frac{1}{2}\breve{BD} - \frac{1}{2}\breve{AC}=\frac{1}{2}(\breve{BD} - \breve{AC})$
+\end{enumerate}
+
+\vspace{-0.5cm}
+
+\begin{flushright}
+	ЧТД.
+\end{flushright}
+
+\hfill
+
+\paragraph{Теорема о касательной и секущей}\
+
+\hfill
+
+\begin{wrapfigure}{R}{5cm}
+		\resizebox{!}{4.5cm}{%
+		\begin{tikzpicture}
+			\coordinate[label=left:$A$] (A) at (0, 4);
+			\coordinate[label=above:$B$] (B) at (3, 4);
+			\coordinate (O) at (3, 2);
+			\node (CO) [draw, circle through=(B)] at (O) {}; 
+			\draw (A)--(B);
+			\coordinate (R) at (3, 1);
+			\node[coordinate, label=210:$C$] (C) at (intersection of R--A and CO) {};
+			\node[coordinate, label=below right:$D$] (D) at (intersection of A--C and CO) {};
+			\draw (A)--(D);
+			\draw (B)--(C);
+			\draw (B)--(D);
+			\pic[draw, angle radius=15px] {angle = A--B--C};
+			\pic[draw, angle radius=15px] {angle = D--A--B};
+			\pic[draw, angle radius=20px] {angle = D--A--B};
+			\pic[draw, angle radius=15px] {angle = B--D--C};
+		\begin{pgfonlayer}{background}
+		\node [fill=yellow!,fit=(CO) (A), rounded corners] {};
+		\end{pgfonlayer}
+		\end{tikzpicture}
+		}
+\end{wrapfigure}
+
+\hfill
+
+Доказательство:
+\begin{enumerate}
+\item $\angle{D}$ является вписанным углом окружности $\Rightarrow \angle{D}=\frac{1}{2}\breve{BC}$
+\item Т.к. угол между касательной и секущей равен половине стягивающей дуги, то $\angle{CBA}=\frac{1}{2}\breve{BC}$
+\item $\angle{D}=\angle{CBA}=\frac{1}{2}\breve{BC} \Rightarrow \triangle{ABD}  \sim \triangle{ACB}$ по 2-ум углам $\Rightarrow \frac{AC}{AB}=\frac{AB}{AD} \Leftrightarrow AB^2=AC \cdot AD$
+\end{enumerate}
+\begin{flushright}
+	ЧТД.
+\end{flushright}
+
+
+
+
+
+\end{document}
